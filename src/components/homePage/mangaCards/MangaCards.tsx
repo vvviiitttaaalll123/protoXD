@@ -56,7 +56,8 @@ const MangaCards = () => {
               temp.mangaId = relation.id;
               try {
                 const response = await axios.get(
-                  COVER_URL + temp.mangaId + COVER_FILTER
+                  COVER_URL + temp.mangaId + COVER_FILTER, 
+                  {headers: {"Access-Control-Allow-Origin": "*"}}
                 );
                 temp.imageUrl = response.data.data[0].attributes.fileName;
               } catch (err) {

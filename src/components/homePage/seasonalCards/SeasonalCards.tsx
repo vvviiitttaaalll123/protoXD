@@ -18,7 +18,9 @@ const SeasonalCards = () => {
   useEffect(() => {
     const getSeasonalMangaList = async () => {
       try {
-        const res = await axios.get(GET_SEASONAL_UPDATES);
+        const res = await axios.get(GET_SEASONAL_UPDATES, {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
         return res.data;
       } catch (err) {
         console.log(err);
@@ -50,7 +52,9 @@ const SeasonalCards = () => {
     const populateDetails = async (url: string) => {
       if (getMangaUrls.length > 0) {
         try {
-          const res = await axios.get(url);
+          const res = await axios.get(url, {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
           return res.data;
         } catch (err) {
           console.log(err);

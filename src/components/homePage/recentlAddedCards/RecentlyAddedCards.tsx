@@ -11,7 +11,9 @@ const RecentlyAddedCards = () => {
   useEffect(() => {
     const getRecentlyAddedDetails = async () => {
       try {
-        const res = await axios.get(GET_RECENTLY_ADDED);
+        const res = await axios.get(GET_RECENTLY_ADDED, {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
         return res.data;
       } catch (err) {
         console.log(err);

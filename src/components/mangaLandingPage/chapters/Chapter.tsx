@@ -26,7 +26,9 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
   ) => {
     try {
       if (allChapters && allChapters.data) {
-        const res = await axios.get(GET_CHAPTERS(mangaId, limit, 96));
+        const res = await axios.get(GET_CHAPTERS(mangaId, limit, 96), {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
         let allChaptersArr: ChapterData[] = allChapters.data.slice(0);
         allChaptersArr = [...allChapters.data, ...res.data.data];
         console.log(allChaptersArr);
@@ -40,7 +42,9 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
   useEffect(() => {
     const getChapters = async () => {
       try {
-        const res = await axios.get(GET_CHAPTERS(mangaId));
+        const res = await axios.get(GET_CHAPTERS(mangaId), {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
         limit = res.data.total;
         return res.data;
       } catch (err) {

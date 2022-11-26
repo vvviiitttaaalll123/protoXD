@@ -21,8 +21,6 @@ const ViewChapter = () => {
   const { allChapterArray } = useContext(ChapterContext);
   const navigate = useNavigate();
 
-  
-
   const handleRedirect = () => {
     if (chapterDetails)
       return (window.location.href =
@@ -36,7 +34,9 @@ const ViewChapter = () => {
   useEffect(() => {
     const getChapterImages = async (chapterId: string) => {
       try {
-        const res = await axios.get(GET_CHAPTER_IMAGES(chapterId));
+        const res = await axios.get(GET_CHAPTER_IMAGES(chapterId), {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
         return res.data;
       } catch (err) {
         console.log(err);
@@ -53,7 +53,9 @@ const ViewChapter = () => {
   useEffect(() => {
     const getChapterDetail = async (chapterId: string) => {
       try {
-        const res = await axios.get(GET_CHAPTER_DETAIL(chapterId));
+        const res = await axios.get(GET_CHAPTER_DETAIL(chapterId), {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
         return res.data;
       } catch (err) {
         console.log(err);

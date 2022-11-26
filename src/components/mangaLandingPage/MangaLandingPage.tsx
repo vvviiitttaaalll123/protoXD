@@ -24,7 +24,9 @@ const MangaLandingPage = () => {
     const getMangaDetails = async () => {
       const url = PERTICULAR_MANGA(mangaId);
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(url, {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        });
         return res.data;
       } catch (err) {
         console.log(err);
