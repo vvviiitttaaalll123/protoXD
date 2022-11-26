@@ -1,0 +1,55 @@
+@import "../../colorsConstants.scss";
+
+.container {
+  width: 75%;
+  margin: auto;
+  font-family: "Fira Code";
+  color: $white-color;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.right {
+  color: $white-color;
+
+  .profile {
+    margin: auto;
+    margin-left: 0.7rem;
+  }
+}
+
+.searchForm {
+  background-color: $search-background-color;
+  .searchIcon {
+    margin: auto;
+    padding-right: 0.4rem;
+  }
+
+  .searchBox {
+    padding: 0.5rem;
+    margin-right: 5px;
+    color: $black-color;
+    outline: none;
+  }
+}
+
+.removeDecoration {
+  color: $white-color;
+  text-decoration: none;
+}
+
+.removeDecoration:hover {
+  color: $white-color;
+}
+
+@media only screen and (max-width: 57rem) {
+  .container {
+    flex-direction: column;
+
+    .right {
+      padding: 1rem;
+      flex-shrink: 1;
+    }
+  }
+}

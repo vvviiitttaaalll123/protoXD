@@ -1,0 +1,22 @@
+@import "../../../colorsConstants.scss";
+
+.contentContainer {
+  background-color: $background-search;
+  text-decoration: none;
+  color: $white-color;
+  .content {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.contentContainer:hover {
+  text-decoration: none;
+  color: $white-color;
+}
+
+.showMore {
+  width: 100%;
+  background-color: $scroll-thumb-color;
+  padding: 1rem;
+}

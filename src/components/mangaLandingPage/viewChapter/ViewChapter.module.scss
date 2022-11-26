@@ -1,0 +1,16 @@
+@import "../../../colorsConstants.scss";
+
+.button {
+  background-color: $scroll-thumb-color;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.redirect {
+  justify-content: center;
+  background-color: $scroll-thumb-color;
+  padding: 1rem;
+  width: 40%;
+  border-radius: 5px;
+  margin-top: 2rem;
+}

@@ -1,0 +1,41 @@
+@import "../../../colorsConstants.scss";
+
+$margin-right: 1rem;
+$margin-bottom: 1rem;
+$line-height: 2.45;
+$font-size-sm: 0.7rem;
+$max-text-width: 11rem;
+
+.container {
+  background-color: $background-color;
+  color: $white-color;
+}
+
+.removeDecoration {
+  text-decoration: none;
+  color: $white-color;
+}
+
+.scannerGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hideText {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  max-width: $max-text-width;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.fontSmall {
+  color: $white-color;
+  margin: auto;
+}
+
+.group {
+  color: $white-color;
+}

@@ -1,0 +1,7 @@
+@import "../../../colorsConstants.scss";
+
+.container {
+  background-color: $background-color;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
