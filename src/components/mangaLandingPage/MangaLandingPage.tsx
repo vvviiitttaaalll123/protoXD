@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { instance } from "../../axiosInstance";
 import { IMAGE_URL, PERTICULAR_MANGA } from "../../constants/AllUrls";
+import { MangaLandingType } from "../../GlobalTypes/MangaTypes";
 import Chapter from "./chapters/Chapter";
 import MangaCover from "./cover/MangaCover";
-import { MangaLandingType } from "./MangaLandingType";
 
 const MangaLandingPage = () => {
   const currLocation = useLocation();
@@ -37,7 +37,11 @@ const MangaLandingPage = () => {
   useEffect(() => {
     const extractAuthor = (perticularMangaDetail: MangaLandingType) => {
       for (let relationship of perticularMangaDetail.data.relationships) {
-        if (relationship.type === "author" && relationship.attributes.name) {
+        if (
+          relationship.type === "author" &&
+          relationship.attributes &&
+          relationship.attributes.name
+        ) {
           setAuthor(relationship.attributes.name);
         }
 
@@ -55,6 +59,7 @@ const MangaLandingPage = () => {
       {perticularMangaDetail && (
         <>
           <MangaCover
+            tags={perticularMangaDetail.data.attributes.tags}
             mangaId={perticularMangaDetail.data.id}
             altTitle={
               perticularMangaDetail.data.attributes.altTitles[0]

@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <div className="body">
+      <div className="body container">
         <NavBar />
       </div>
       <ChapterContextProvider>

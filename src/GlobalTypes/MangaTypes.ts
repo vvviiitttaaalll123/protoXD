@@ -1,13 +1,23 @@
-import { Dict } from "./cover/MangaCoverTypes";
+export type Dict = {
+  [key: string]: string;
+};
 
 type Relationships = {
   id: string;
   type: string;
-  attributes: {
+  attributes?: {
     fileName?: string;
     updatedAt: string;
     createdAt: string;
     name?: string;
+  };
+};
+
+export type Tags = {
+  id: string;
+  type: string;
+  attributes: {
+    name: Dict;
   };
 };
 
@@ -20,10 +30,12 @@ type Data = {
     description: Dict;
     createdAt: string;
     updatedAt: string;
+    tags: Tags[];
   };
   relationships: Relationships[];
 };
 
 export type MangaLandingType = {
   data: Data;
+  total: number;
 };

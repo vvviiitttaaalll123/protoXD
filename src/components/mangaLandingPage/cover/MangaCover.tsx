@@ -1,4 +1,6 @@
 import React from "react";
+import { Tags } from "../../../GlobalTypes/MangaTypes";
+import TagsComponent from "../tags/TagsComponent";
 import styles from "./MangaCover.module.scss";
 
 type Temp = {
@@ -9,6 +11,7 @@ type Temp = {
   author: string;
   backgroundImage: string;
   description: string;
+  tags: Tags[];
 };
 
 const MangaCover: React.FC<Temp> = ({
@@ -19,8 +22,8 @@ const MangaCover: React.FC<Temp> = ({
   mangaTitle,
   backgroundImage,
   description,
+  tags,
 }) => {
-
   return (
     <div className="container">
       <div className={`${styles.cardContainer} z-0 left text-white`}>
@@ -39,10 +42,23 @@ const MangaCover: React.FC<Temp> = ({
               <img src={coverUrl} alt="manga cover" />
             </div>
             <div className={`${styles.right} flex flex-shrink flex-col`}>
-              <h2 className="text-5xl">{mangaTitle}</h2>
-              <h5 className="text-3xl pt-3">{altTitle}</h5>
-              <h6 className="text-2xl pt-3">{author}</h6>
-              <p className="flex flex-shrink">{description.split("---")[0]}</p>
+              <h2 className="text-5xl">
+                {mangaTitle ? mangaTitle : "no manga title present"}
+              </h2>
+              <h5 className="text-3xl pt-3">
+                {altTitle ? altTitle : "no alternate title present"}
+              </h5>
+              <h6 className="text-2xl pt-3">
+                {author ? author : "no author details present"}
+              </h6>
+              <p className="flex flex-shrink">
+                {description
+                  ? description.split("---")[0]
+                  : "no description currently"}
+              </p>
+              <div className="container mt-5">
+                <TagsComponent tags={tags} />
+              </div>
             </div>
           </div>
         </div>

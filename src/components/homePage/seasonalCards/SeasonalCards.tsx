@@ -5,14 +5,14 @@ import {
   IMAGE_URL,
   MANGA_DETAILS_URL_BUILD,
 } from "../../../constants/AllUrls";
+import { HomePageType } from "../../../GlobalTypes/HomePageTypes";
 import SeasonalCard from "../seasonalCard/SeasonalCard";
 import styles from "./SeasonalCards.module.scss";
-import { MangaDetailsType, MangaList } from "./SeasonalCardsType";
+import { MangaList } from "./SeasonalCardsType";
 
 const SeasonalCards = () => {
   const [seasonalList, setSeasonalList] = useState<MangaList>();
-  const [parsedSeasonalList, setParsedSeasonalList] =
-    useState<MangaDetailsType>();
+  const [parsedSeasonalList, setParsedSeasonalList] = useState<HomePageType>();
   const [getMangaUrls, setMangaUrls] = useState<string>("");
 
   useEffect(() => {

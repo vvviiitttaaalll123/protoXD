@@ -1,6 +1,7 @@
 import { debounce } from "lodash";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import close from "../../assets/close.svg";
 import { instance } from "../../axiosInstance";
 import { IMAGE_URL, SEARCH_URL } from "../../constants/AllUrls";
 import styles from "./NavBar.module.scss";
@@ -8,6 +9,10 @@ import { SearchResultType } from "./SearchResultType";
 
 const NavBar = () => {
   const [searchResult, setSearchResult] = useState<SearchResultType>();
+  const [showSearchResult, setShowSearchResult] = useState<boolean>(false);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+
 
   const debounceFn = useCallback(debounce(handleDebounceFn, 1000), []);
 
@@ -20,14 +25,20 @@ const NavBar = () => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowSearchResult(true);
     debounceFn(e.target.value);
   };
 
-  const navigate = useNavigate();
-  console.log(searchResult);
+  const handleResetSearch = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    setShowSearchResult(false);
+    if (searchRef.current !== null) searchRef.current.value = "";
+  };
+
   return (
     <>
-      <div className={styles.container + " text-white flex "}>
+      <div className={styles.container + " text-white flex w-full"}>
         <div
           className="left"
           onClick={() => navigate("/")}
@@ -44,6 +55,7 @@ const NavBar = () => {
                 name="q"
                 className={styles.searchBox}
                 onChange={(e) => handleChange(e)}
+                ref={searchRef}
               />
               <div className={styles.searchIcon}>
                 <svg
@@ -95,8 +107,17 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      {searchResult && (
-        <div className="flex flex-col">
+      {showSearchResult && searchResult && (
+        <div className={`flex h-52 w-full flex-col overflow-scroll ${styles.searchContainer} `}>
+          <div className="flex cursor-pointer p-2">
+            <div
+              className="flex justify-between w-full gap-4 pb-3"
+              onClick={(e) => handleResetSearch(e)}
+            >
+              <p className="text-white">clear search</p>
+              <img src={close} alt="close search" />
+            </div>
+          </div>
           {searchResult.data.map((elem) => {
             let imageUrl = "";
 
@@ -112,16 +133,16 @@ const NavBar = () => {
                   elem.attributes.title[Object.keys(elem.attributes.title)[0]]
                 }`}
                 key={elem.id}
-                className={`${styles.removeDecoration}`}
+                className={`${styles.removeDecoration} flex p-2`}
               >
-                <div className="flex pb-3">
+                <div className="flex justify-between w-full gap-4 pb-3">
                   <img
                     src={IMAGE_URL(elem.id, imageUrl)}
                     alt="search cover image"
-                    className="h-[5rem] w-[4rem] object-cover"
+                    className="h-[7rem] w-[5rem] object-cover"
                     style={{}}
                   />
-                  <p>
+                  <p className="line-clamp-1">
                     {
                       elem.attributes.title[
                         "en" in Object.keys(elem.attributes.title)

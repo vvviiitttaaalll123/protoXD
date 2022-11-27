@@ -34,7 +34,6 @@ const MangaCards = () => {
   useEffect(() => {
     const populateRequiredValues = async (getData: RecentlyUpdatedType) => {
       let res: ObjectTemplate[] = [];
-
       await Promise.all(
         getData?.data.map(async (elem) => {
           const temp: ObjectTemplate = {
@@ -46,6 +45,7 @@ const MangaCards = () => {
             id: "",
             updatedAt: "",
           };
+
           for (let relation of elem.relationships) {
             if (relation.type === "manga") {
               temp.mangaName = relation.attributes.title

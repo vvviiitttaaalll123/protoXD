@@ -1,4 +1,5 @@
-import { Dict } from "../mangaLandingPage/cover/MangaCoverTypes";
+import { Dict } from "../../GlobalTypes/MangaTypes";
+
 
 type Relationship = {
   id: string;
