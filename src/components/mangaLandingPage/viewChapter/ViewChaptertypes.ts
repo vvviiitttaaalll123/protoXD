@@ -1,4 +1,4 @@
-import { Dict } from "../cover/MangaCoverTypes";
+import { Dict } from "../../../GlobalTypes/MangaTypes";
 
 export type ViewChapterType = {
   baseUrl: string;
