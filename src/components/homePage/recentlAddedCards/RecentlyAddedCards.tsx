@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { instance, instanceIso } from "../../../axiosInstance";
+import { instance } from "../../../axiosInstance";
 import { GET_RECENTLY_ADDED, IMAGE_URL } from "../../../constants/AllUrls";
 import { HomePageType } from "../../../GlobalTypes/HomePageTypes";
 import RecentlyAddedCard from "../recentlyAddedCard/RecentlyAddedCard";
@@ -10,7 +10,6 @@ const RecentlyAddedCards = () => {
   useEffect(() => {
     const getRecentlyAddedDetails = async () => {
       try {
-        instanceIso(GET_RECENTLY_ADDED);
         const res = await instance.get(GET_RECENTLY_ADDED);
         return res.data;
       } catch (err) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { instance, instanceIso } from "../../../axiosInstance";
+import { instance } from "../../../axiosInstance";
 import {
   COVER_FILTER,
   COVER_URL,
@@ -21,7 +21,6 @@ const MangaCards = () => {
   useEffect(() => {
     const initRecentlyUpdatedData = async () => {
       try {
-        instanceIso(url);
         const res = await instance.get(url);
         return res.data;
       } catch (err) {
@@ -56,7 +55,6 @@ const MangaCards = () => {
                 : "";
               temp.mangaId = relation.id;
               try {
-                instanceIso(COVER_URL + temp.mangaId + COVER_FILTER);
                 const response = await instance.get(
                   COVER_URL + temp.mangaId + COVER_FILTER
                 );
