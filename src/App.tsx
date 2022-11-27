@@ -8,8 +8,6 @@ import NavBar from "./components/navBar/NavBar";
 import ChapterContextProvider from "./contextStore/ChapterContext";
 
 function App() {
-  // const { isTyping } = useContext(SearchContext);
-  // console.log(isTyping);
 
   return (
     <>

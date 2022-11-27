@@ -17,5 +17,10 @@
 # We have to tell the Netlify that this URL will be served by the books.js function.
 [[redirects]]
   from = "/*"
-  to = "https://api.mangadex.org/"
+  to = "/*"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
