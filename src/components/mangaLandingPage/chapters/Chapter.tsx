@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { instance } from "../../../axiosInstance";
 import { GET_CHAPTERS } from "../../../constants/AllUrls";
 import styles from "./Chapter.module.scss";
 import { ChapterData, ChapterType } from "./chapterType";
@@ -26,9 +26,7 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
   ) => {
     try {
       if (allChapters && allChapters.data) {
-        const res = await axios.get(GET_CHAPTERS(mangaId, limit, 96), {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await instance.get(GET_CHAPTERS(mangaId, limit, 96));
         let allChaptersArr: ChapterData[] = allChapters.data.slice(0);
         allChaptersArr = [...allChapters.data, ...res.data.data];
         console.log(allChaptersArr);
@@ -42,9 +40,7 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
   useEffect(() => {
     const getChapters = async () => {
       try {
-        const res = await axios.get(GET_CHAPTERS(mangaId), {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await instance.get(GET_CHAPTERS(mangaId));
         limit = res.data.total;
         return res.data;
       } catch (err) {

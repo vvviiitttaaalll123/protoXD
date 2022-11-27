@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { instance } from "../../../axiosInstance";
 import {
   GET_CHAPTER_DETAIL,
   GET_CHAPTER_IMAGES,
@@ -34,9 +34,7 @@ const ViewChapter = () => {
   useEffect(() => {
     const getChapterImages = async (chapterId: string) => {
       try {
-        const res = await axios.get(GET_CHAPTER_IMAGES(chapterId), {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await instance.get(GET_CHAPTER_IMAGES(chapterId));
         return res.data;
       } catch (err) {
         console.log(err);
@@ -53,9 +51,7 @@ const ViewChapter = () => {
   useEffect(() => {
     const getChapterDetail = async (chapterId: string) => {
       try {
-        const res = await axios.get(GET_CHAPTER_DETAIL(chapterId), {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await instance.get(GET_CHAPTER_DETAIL(chapterId));
         return res.data;
       } catch (err) {
         console.log(err);

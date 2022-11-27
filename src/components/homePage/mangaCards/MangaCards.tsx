@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { instance } from "../../../axiosInstance";
 import {
   COVER_FILTER,
   COVER_URL,
@@ -21,7 +21,7 @@ const MangaCards = () => {
   useEffect(() => {
     const initRecentlyUpdatedData = async () => {
       try {
-        const res = await axios.get(url);
+        const res = await instance.get(url);
         return res.data;
       } catch (err) {
         console.log(err);
@@ -55,9 +55,8 @@ const MangaCards = () => {
                 : "";
               temp.mangaId = relation.id;
               try {
-                const response = await axios.get(
-                  COVER_URL + temp.mangaId + COVER_FILTER, 
-                  {headers: {"Access-Control-Allow-Origin": "*"}}
+                const response = await instance.get(
+                  COVER_URL + temp.mangaId + COVER_FILTER
                 );
                 temp.imageUrl = response.data.data[0].attributes.fileName;
               } catch (err) {
@@ -90,7 +89,7 @@ const MangaCards = () => {
 
   return (
     <>
-      {interMediateBufferObject && (
+      {interMediateBufferObject && interMediateBufferObject.length > 0 && (
         <p className="container text-white pt-3 pb-3 text-3xl">UPDATED</p>
       )}
       <div className={"container " + styles.container}>

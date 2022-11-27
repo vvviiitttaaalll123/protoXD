@@ -1,7 +1,7 @@
-import axios from "axios";
 import { debounce } from "lodash";
 import { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { instance } from "../../axiosInstance";
 import { IMAGE_URL, SEARCH_URL } from "../../constants/AllUrls";
 import styles from "./NavBar.module.scss";
 import { SearchResultType } from "./SearchResultType";
@@ -13,17 +13,9 @@ const NavBar = () => {
 
   function handleDebounceFn(inputValue: string) {
     if (inputValue.length > 0) {
-      axios
-        .get(SEARCH_URL(inputValue), {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "user-agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
-          },
-        })
-        .then((res) => {
-          setSearchResult(res.data);
-        });
+      instance.get(SEARCH_URL(inputValue)).then((res) => {
+        setSearchResult(res.data);
+      });
     }
   }
 

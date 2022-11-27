@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { instance } from "../../../axiosInstance";
 import {
   GET_SEASONAL_UPDATES,
   IMAGE_URL,
@@ -18,9 +18,7 @@ const SeasonalCards = () => {
   useEffect(() => {
     const getSeasonalMangaList = async () => {
       try {
-        const res = await axios.get(GET_SEASONAL_UPDATES, {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await instance.get(GET_SEASONAL_UPDATES);
         return res.data;
       } catch (err) {
         console.log(err);
@@ -52,9 +50,7 @@ const SeasonalCards = () => {
     const populateDetails = async (url: string) => {
       if (getMangaUrls.length > 0) {
         try {
-          const res = await axios.get(url, {
-            headers: { "Access-Control-Allow-Origin": "*" },
-          });
+          const res = await instance.get(url);
           return res.data;
         } catch (err) {
           console.log(err);

@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { instance } from "../../../axiosInstance";
 import { GET_RECENTLY_ADDED, IMAGE_URL } from "../../../constants/AllUrls";
 import RecentlyAddedCard from "../recentlyAddedCard/RecentlyAddedCard";
 import { RecentlyAddedType } from "./RecentlyAddedCardType";
@@ -11,9 +11,7 @@ const RecentlyAddedCards = () => {
   useEffect(() => {
     const getRecentlyAddedDetails = async () => {
       try {
-        const res = await axios.get(GET_RECENTLY_ADDED, {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await instance.get(GET_RECENTLY_ADDED);
         return res.data;
       } catch (err) {
         console.log(err);

@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { instance } from "../../axiosInstance";
 import { IMAGE_URL, PERTICULAR_MANGA } from "../../constants/AllUrls";
 import Chapter from "./chapters/Chapter";
 import MangaCover from "./cover/MangaCover";
@@ -24,9 +24,7 @@ const MangaLandingPage = () => {
     const getMangaDetails = async () => {
       const url = PERTICULAR_MANGA(mangaId);
       try {
-        const res = await axios.get(url, {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        });
+        const res = await instance.get(url);
         return res.data;
       } catch (err) {
         console.log(err);
