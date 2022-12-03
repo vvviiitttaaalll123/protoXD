@@ -1,7 +1,7 @@
 const BASE_URL = "https://protoxd.onrender.com/";
 
 export const GET_SEASONAL_UPDATES =
-  BASE_URL + "get_seasonal_updates";
+  BASE_URL + "get_seasonal_updates/";
 
 export const GET_RECENTLY_UPDATED =
   BASE_URL +
