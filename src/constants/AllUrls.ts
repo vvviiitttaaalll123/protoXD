@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/";
+const BASE_URL = "https://protoxd.onrender.com/";
 
 export const GET_SEASONAL_UPDATES =
   BASE_URL + "get_seasonal_updates/";
