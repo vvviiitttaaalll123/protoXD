@@ -19,6 +19,7 @@ type Data = {
   type: string;
   attributes: {
     chapter: string;
+    title: string;
   };
   relationships: Relationship[];
 };

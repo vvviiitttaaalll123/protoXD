@@ -38,7 +38,7 @@ const MangaCards = () => {
           const temp: ObjectTemplate = {
             imageUrl: "",
             mangaId: "",
-            mangaName: "",
+            mangaName: elem.attributes.title,
             scannerName: "",
             chapter: "",
             id: "",
@@ -46,12 +46,8 @@ const MangaCards = () => {
           };
 
           for (let relation of elem.relationships) {
+            console.log(relation)
             if (relation.type === "manga") {
-              temp.mangaName = relation.attributes.title
-                ? relation.attributes.title[
-                    Object.keys(relation.attributes.title)[0]
-                  ]
-                : "";
               temp.mangaId = relation.id;
               try {
                 const response = await instance.get(
