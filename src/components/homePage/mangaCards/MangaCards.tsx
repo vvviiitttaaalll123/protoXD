@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { instance } from "../../../axiosInstance";
 import {
-  COVER_FILTER,
   COVER_URL,
   GET_RECENTLY_UPDATED,
   IMAGE_URL,
@@ -56,7 +55,7 @@ const MangaCards = () => {
               temp.mangaId = relation.id;
               try {
                 const response = await instance.get(
-                  COVER_URL + temp.mangaId + COVER_FILTER
+                  COVER_URL + `?manga_id=${temp.mangaId}`
                 );
                 temp.imageUrl = response.data.data[0].attributes.fileName;
               } catch (err) {
@@ -96,7 +95,10 @@ const MangaCards = () => {
         {interMediateBufferObject.map((elem) => {
           return (
             <MangaCard
-              imageSrc={IMAGE_URL(elem.mangaId, elem.imageUrl)}
+              imageSrc={
+                IMAGE_URL +
+                `?manga_id=${elem.mangaId}&image_url=${elem.imageUrl}`
+              }
               chapterNumber={elem.chapter}
               mangaTitle={elem.mangaName}
               scannerName={elem.scannerName}

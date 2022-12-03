@@ -22,7 +22,9 @@ const MangaLandingPage = () => {
 
   useEffect(() => {
     const getMangaDetails = async () => {
-      const url = PERTICULAR_MANGA(mangaId);
+      const url = `${PERTICULAR_MANGA}${mangaId}/${
+        currLocation.pathname.split("/")[3]
+      }/`;
       try {
         const res = await instance.get(url);
         return res.data;
@@ -71,7 +73,7 @@ const MangaLandingPage = () => {
                 : "No alternate Title"
             }
             author={author}
-            coverUrl={IMAGE_URL(mangaId, imageUrl, ".256.jpg")}
+            coverUrl={`${IMAGE_URL}?manga_id=${mangaId}&image_url=${imageUrl}&bit=${".256.jpg"}`}
             mangaTitle={
               perticularMangaDetail.data.attributes.title[
                 "en" in Object.keys(perticularMangaDetail.data.attributes.title)
@@ -79,7 +81,7 @@ const MangaLandingPage = () => {
                   : Object.keys(perticularMangaDetail.data.attributes.title)[0]
               ]
             }
-            backgroundImage={IMAGE_URL(mangaId, imageUrl, "")}
+            backgroundImage={`${IMAGE_URL}?manga_id=${mangaId}&image_url=${imageUrl}`}
             key={perticularMangaDetail.data.id}
             description={
               perticularMangaDetail.data.attributes.description["en"]

@@ -26,7 +26,9 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
   ) => {
     try {
       if (allChapters && allChapters.data) {
-        const res = await instance.get(GET_CHAPTERS(mangaId, limit, 96));
+        const res = await instance.get(
+          `${GET_CHAPTERS}?manga_id=mangaId&limit=${limit}&bit=${96}`
+        );
         let allChaptersArr: ChapterData[] = allChapters.data.slice(0);
         allChaptersArr = [...allChapters.data, ...res.data.data];
         setAllChapters({ data: allChaptersArr, total: allChapters.total });
@@ -39,7 +41,7 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
   useEffect(() => {
     const getChapters = async () => {
       try {
-        const res = await instance.get(GET_CHAPTERS(mangaId));
+        const res = await instance.get(`${GET_CHAPTERS}?manga_id=${mangaId}`);
         limit = res.data.total;
         return res.data;
       } catch (err) {
@@ -47,7 +49,11 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
       }
     };
 
-    getChapters().then((res) => setAllChapters(res));
+    getChapters().then((res) => {
+      console.log(res);
+      setAllChapters(res);
+      return res;
+    });
   }, []);
 
   useEffect(() => {

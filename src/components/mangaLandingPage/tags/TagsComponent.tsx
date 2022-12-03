@@ -8,7 +8,7 @@ const TagsComponent: React.FC<{ tags: Tags[] }> = ({ tags }) => {
         tags.map((elem) => {
           return (
             <div className="flex bg-slate-500 mr-4 rounded p-2" key={elem.id}>
-              <p>
+              <p className="line-clamp-1">
                 {
                   elem.attributes.name[
                     "en" in Object.keys(elem.attributes.name)

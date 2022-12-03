@@ -13,12 +13,11 @@ const NavBar = () => {
   const searchRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-
   const debounceFn = useCallback(debounce(handleDebounceFn, 1000), []);
 
   function handleDebounceFn(inputValue: string) {
     if (inputValue.length > 0) {
-      instance.get(SEARCH_URL(inputValue)).then((res) => {
+      instance.get(SEARCH_URL + `?title=${inputValue}`).then((res) => {
         setSearchResult(res.data);
       });
     }
@@ -108,7 +107,9 @@ const NavBar = () => {
         </div>
       </div>
       {showSearchResult && searchResult && (
-        <div className={`flex h-52 w-full flex-col overflow-scroll ${styles.searchContainer} `}>
+        <div
+          className={`flex h-52 w-full flex-col overflow-scroll ${styles.searchContainer} `}
+        >
           <div className="flex cursor-pointer p-2">
             <div
               className="flex justify-between w-full gap-4 pb-3"
@@ -137,10 +138,9 @@ const NavBar = () => {
               >
                 <div className="flex justify-between w-full gap-4 pb-3">
                   <img
-                    src={IMAGE_URL(elem.id, imageUrl)}
+                    src={IMAGE_URL + `?manga_id=${elem.id}&image_url=${imageUrl}`}
                     alt="search cover image"
                     className="h-[7rem] w-[5rem] object-cover"
-                    style={{}}
                   />
                   <p className="line-clamp-1">
                     {

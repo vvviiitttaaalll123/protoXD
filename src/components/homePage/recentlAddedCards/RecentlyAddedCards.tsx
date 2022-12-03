@@ -30,7 +30,7 @@ const RecentlyAddedCards = () => {
           let imgUrl = "";
           for (let relation of elem.relationships) {
             if (relation.attributes) {
-              imgUrl = IMAGE_URL(elem.id, relation.attributes.fileName);
+              imgUrl = `${IMAGE_URL}?manga_id=${elem.id}&image_url=${relation.attributes.fileName}`;
             }
           }
           return (

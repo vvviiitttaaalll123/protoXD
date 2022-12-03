@@ -13,7 +13,7 @@ import { MangaList } from "./SeasonalCardsType";
 const SeasonalCards = () => {
   const [seasonalList, setSeasonalList] = useState<MangaList>();
   const [parsedSeasonalList, setParsedSeasonalList] = useState<HomePageType>();
-  const [getMangaUrls, setMangaUrls] = useState<string>("");
+  const [getMangaUrls, setMangaUrls] = useState<string[]>([]);
 
   useEffect(() => {
     const getSeasonalMangaList = async () => {
@@ -31,12 +31,11 @@ const SeasonalCards = () => {
   useEffect(() => {
     const getMangaDetailsUrl = async (seasonalList: MangaList) => {
       let urlBuild = MANGA_DETAILS_URL_BUILD;
+      let mangaIdArray = [];
       for (let mangaId of seasonalList.data.relationships) {
-        urlBuild += mangaId.id;
-        urlBuild += "&ids[]=";
+        mangaIdArray.push(mangaId.id);
       }
-      urlBuild = urlBuild.slice(0, -7) + "&limit=24";
-      return urlBuild;
+      return mangaIdArray;
     };
 
     if (seasonalList) {
@@ -47,10 +46,12 @@ const SeasonalCards = () => {
   }, [seasonalList]);
 
   useEffect(() => {
-    const populateDetails = async (url: string) => {
+    const populateDetails = async (mangaIdArray: string[]) => {
       if (getMangaUrls.length > 0) {
         try {
-          const res = await instance.get(url);
+          const res = await instance.post(MANGA_DETAILS_URL_BUILD, {
+            ids: mangaIdArray,
+          });
           return res.data;
         } catch (err) {
           console.log(err);
@@ -75,7 +76,7 @@ const SeasonalCards = () => {
               let imgURL = "";
               for (let relation of elem.relationships) {
                 if (relation.attributes) {
-                  imgURL = IMAGE_URL(elem.id, relation.attributes.fileName);
+                  imgURL = `${IMAGE_URL}?manga_id=${elem.id}&image_url=${relation.attributes.fileName}`;
                   break;
                 }
               }

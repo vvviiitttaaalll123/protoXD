@@ -34,7 +34,9 @@ const ViewChapter = () => {
   useEffect(() => {
     const getChapterImages = async (chapterId: string) => {
       try {
-        const res = await instance.get(GET_CHAPTER_IMAGES(chapterId));
+        const res = await instance.get(
+          `${GET_CHAPTER_IMAGES}?chapter_id=${chapterId}`
+        );
         return res.data;
       } catch (err) {
         console.log(err);
@@ -51,7 +53,9 @@ const ViewChapter = () => {
   useEffect(() => {
     const getChapterDetail = async (chapterId: string) => {
       try {
-        const res = await instance.get(GET_CHAPTER_DETAIL(chapterId));
+        const res = await instance.get(
+          `${GET_CHAPTER_DETAIL}?chapter_id=${chapterId}`
+        );
         return res.data;
       } catch (err) {
         console.log(err);
