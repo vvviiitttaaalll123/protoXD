@@ -46,7 +46,6 @@ const MangaCards = () => {
           };
 
           for (let relation of elem.relationships) {
-            console.log(relation)
             if (relation.type === "manga") {
               temp.mangaId = relation.id;
               try {

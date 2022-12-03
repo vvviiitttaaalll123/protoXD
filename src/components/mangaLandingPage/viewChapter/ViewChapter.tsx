@@ -77,10 +77,6 @@ const ViewChapter = () => {
     }
   }, [chapterDetails]);
 
-  if (allChapterArray) {
-    console.log(allChapterArray);
-  }
-
   return (
     <>
       {chapterDetails && chapterDetails.data && (

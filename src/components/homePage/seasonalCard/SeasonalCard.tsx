@@ -22,7 +22,7 @@ const SeasonalCard: React.FC<PropType> = ({
     }
   );
   const [urlEncodedMangaTitle, _] = useState<string>(urlMangaTitle);
-  // console.log(urlMangaTitle);
+
   return (
     <div
       style={{
