@@ -30,6 +30,7 @@ const Chapter: React.FC<{ mangaId: string }> = ({ mangaId }) => {
           `${GET_CHAPTERS}?manga_id=mangaId&limit=${limit}&bit=${96}`
         );
         let allChaptersArr: ChapterData[] = allChapters.data.slice(0);
+        console.log({ data: res.data, res });
         allChaptersArr = [...allChapters.data, ...res.data.data];
         setAllChapters({ data: allChaptersArr, total: allChapters.total });
       }

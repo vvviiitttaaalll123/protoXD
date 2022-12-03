@@ -10,6 +10,7 @@ import { SearchResultType } from "./SearchResultType";
 const NavBar = () => {
   const [searchResult, setSearchResult] = useState<SearchResultType>();
   const [showSearchResult, setShowSearchResult] = useState<boolean>(false);
+  const [searchString, setSearchString] = useState<string>("");
   const searchRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -23,9 +24,22 @@ const NavBar = () => {
     }
   }
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const inputValue = searchString;
+    if (inputValue && inputValue.length > 0) {
+      instance.get(SEARCH_URL + `?title=${inputValue}`).then((res) => {
+        setSearchResult(res.data);
+      });
+    }
+    if (searchRef && searchRef.current) searchRef.current.value = "";
+    searchRef.current?.blur();
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowSearchResult(true);
     debounceFn(e.target.value);
+    setSearchString(e.target.value);
   };
 
   const handleResetSearch = (
@@ -47,11 +61,15 @@ const NavBar = () => {
         </div>
         <div className={styles.right + " flex"}>
           <div className="search flex">
-            <form className={styles.searchForm + " flex"}>
+            <form
+              className={styles.searchForm + " flex"}
+              onSubmit={(e) => handleSubmit(e)}
+            >
               <input
                 placeholder="Search"
                 title="Search"
                 name="q"
+                id={"searchName"}
                 className={styles.searchBox}
                 onChange={(e) => handleChange(e)}
                 ref={searchRef}
@@ -138,7 +156,9 @@ const NavBar = () => {
               >
                 <div className="flex justify-between w-full gap-4 pb-3">
                   <img
-                    src={IMAGE_URL + `?manga_id=${elem.id}&image_url=${imageUrl}`}
+                    src={
+                      IMAGE_URL + `?manga_id=${elem.id}&image_url=${imageUrl}`
+                    }
                     alt="search cover image"
                     className="h-[7rem] w-[5rem] object-cover"
                   />
