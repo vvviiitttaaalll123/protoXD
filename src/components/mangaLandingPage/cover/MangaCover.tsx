@@ -41,7 +41,7 @@ const MangaCover: React.FC<Temp> = ({
             <div className={`${styles.rightContainer}`}>
               <img src={coverUrl} alt="manga cover" />
             </div>
-            <div className={`${styles.right} flex flex-shrink flex-col`}>
+            <div className={`${styles.right} row flex flex-shrink flex-col`}>
               <h2 className="text-5xl">
                 {mangaTitle ? mangaTitle : "no manga title present"}
               </h2>
@@ -56,8 +56,8 @@ const MangaCover: React.FC<Temp> = ({
                   ? description.split("---")[0]
                   : "no description currently"}
               </p>
-              <div className="container mt-5">
-                <TagsComponent tags={tags} />
+              <div className="mt-5">
+                <TagsComponent tags={tags.splice(0, 15)} />
               </div>
             </div>
           </div>
